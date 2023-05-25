@@ -13,6 +13,15 @@
   <h1>Hello vue from frontend masters</h1>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <div id="app">
+    <h1>Counter</h1>
+    <P>{{counter}}</P>
+    <button v-on:click="incrementCount">Increment Count</button>
+    <div>
+      <level for="incrementCount">Increment By : </level>
+      <input type="number" //v-bind:value="incrementAmount" //v-on:input="changeIncrementAmount"
+        v-model="incrementAmount">
+    </div>
+    <hr />
     <p v-if="message.length % 2 === 0">Even: {{message}}</p>
     <p v-else>Odd :{{message}}</p>
     <p> Length: {{message.length}}</p>
@@ -28,9 +37,12 @@
     </ul>
   </div>
   <script>
+
     const app = Vue.createApp({
       data() {
         return {
+          counter: 10,
+          incrementAmount: 10,
           message: `Hello vue from frontend masters i'm working`,
           listOfNumber: [
             { name: 1, id: 'c092b104 - ec8d - 4283 - a1ed - b007d25eedca', list: [1, 2, 3] },
@@ -40,7 +52,18 @@
             { name: 5, id: '690abbad - 1b33 - 477a - b11a - 42db5deb2b06', list: [1, 2, 3] },
             { name: 6, id: 'c78b2844 - 1d56 - 4a8f - 8e32 - da5c620d6fdb', list: [1, 2, 3] }]
         }
-      }
+      },
+      methods: {
+        /*
+        When use v-model then dont need this code.
+          // changeIncrementAmount(event) {
+          //   this.incrementAmount =Number(event.target.value);
+          // },
+        */
+        incrementCount() {
+          this.counter += this.incrementAmount;
+        }
+      },
     })
     app.mount('#app');
   </script>

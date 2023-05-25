@@ -10,6 +10,7 @@
 
 <body>
   <div id="app">
+    <h1>{{counterTitle}}</h1>
     <p v-if="characterList.length === 0">there is no character</p>
     <ul v-else>
       <li v-for="character in characterList">
@@ -26,10 +27,8 @@
     <p v-else>There is no Favourite Character</p>
     <h2>New Character</h2>
     <pre>{{newCharacter}}</pre>
-    <level for="character-name">Name</level>
-    <input type="text" 
-    v-model="newCharacter.name"
-    @keyup.enter="addNewCharacter">
+    <label for="character-name">Name</label>
+    <input type="text" v-model="newCharacter.name" @keyup.enter="addNewCharacter">
     <p>
       <span v-for="(character,index) in characterList">
         {{character.name}} {{index === characterList.length - 1 ? '' : ',' }}
@@ -40,8 +39,9 @@
   <script>
     Vue.createApp({
       data: () => ({
-        newCharacter:{
-          name:''
+        counterTitle :'Counter Standard',
+        newCharacter: {
+          name: ''
         },
         characterList: [{
           name: 'Raton'
@@ -57,8 +57,11 @@
         favcharacterList: []
       }),
       methods: {
-        addNewCharacter(){
+        addNewCharacter() {
           this.characterList.push(this.newCharacter);
+          this.newCharacter = {
+            name: ''
+          }
         },
         favouriteCharacter(character) {
           this.favcharacterList.push(character)

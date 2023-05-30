@@ -28,11 +28,11 @@
     <p v-if="message.length % 2 === 0">Even: {{message}}</p>
     <p v-else>Odd :{{message}}</p>
     <p> Length: {{message.length}}</p>
-    <ul>
-      <li v-for="item in listOfNumber">
+    <ul v-for="(item, index) in listOfNumber" :key="`item-${index}`">
+      <li>
         {{item.id}}
         <ul>
-          <li v-for="number in item.list">
+          <li v-for="(number, index) in item.list" :key="`number-${index}`">
             {{number}}
           </li>
         </ul>

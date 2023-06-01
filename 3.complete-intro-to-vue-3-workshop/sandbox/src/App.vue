@@ -1,10 +1,11 @@
 <script>
+import BaseCounter from './components/base-counter.vue'
 export default {
+  components:{
+    BaseCounter,
+  },
   data() {
     return {
-      counter: 10,
-      counterTitle: 'Counter Standard',
-      incrementAmount: 10,
       message: `Hello vue from frontend masters i'm working`,
       listOfNumber: [
         { name: 1, id: 'c092b104 - ec8d - 4283 - a1ed - b007d25eedca', list: [1, 2, 3] },
@@ -16,29 +17,6 @@ export default {
       ]
     }
   },
-  computed: {
-    displayTitle() {
-      if (this.counter > 20) {
-        return 'Counter Standard Too Long'
-      } else {
-        return 'Counter Standard'
-      }
-    },
-    optimizedIncrementAmount() {
-      return this.displayTitle.length * this.incrementAmount
-    }
-  },
-  methods: {
-    /*
-        When use v-model then dont need this code.
-          // changeIncrementAmount(event) {
-          //   this.incrementAmount =Number(event.target.value);
-          // },
-        */
-    incrementCount() {
-      this.counter += this.incrementAmount
-    }
-  },
   watch: {
     counter(newCharacter) {
       if (newCharacter > 20) {
@@ -46,21 +24,13 @@ export default {
       }
     }
   }
+  
 }
 </script>
 
 <template>
   <div>
-    <h1>{{ displayTitle }}</h1>
-    <P>{{ counter }}</P>
-    <button v-on:click="incrementCount">Increment Count</button>
-    <h1>{{ incrementAmount }}</h1>
-    <p>{{ optimizedIncrementAmount }}</p>
-    <div>
-      <label for="incrementCount">Increment By : </label>
-      <!--v-bind:value="incrementAmount" //v-on:input="changeIncrementAmount" -->
-      <input type="number" v-model="incrementAmount" />
-    </div>
+    <BaseCounter/>
     <hr />
     <p v-if="message.length % 2 === 0">Even: {{ message }}</p>
     <p v-else>Odd :{{ message }}</p>

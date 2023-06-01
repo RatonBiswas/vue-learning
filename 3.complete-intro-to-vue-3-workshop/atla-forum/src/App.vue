@@ -1,6 +1,7 @@
 <script>
 export default {
-  data: () => ({
+  data(){
+    return{
     counterTitle: 'Counter Standard',
     newCharacter: {
       name: ''
@@ -28,7 +29,7 @@ export default {
       }
     ],
     favcharacterList: []
-  }),
+  }},
   computed: {
     benderStatistics() {
       const elements = ['Air', 'Earth', 'Water', 'Fire', 'Dragon']

@@ -1,8 +1,12 @@
 <script>
 import BaseCounter from './components/base-counter.vue'
+import UserCard from './components/user-card.vue'
+
+
 export default {
   components:{
     BaseCounter,
+    UserCard
   },
   data() {
     return {
@@ -14,7 +18,27 @@ export default {
         { name: 4, id: 'd287aa0b - 37d9- 4df5 - b840 - 60f6272b99a5', list: [1, 2, 3] },
         { name: 5, id: '690abbad - 1b33 - 477a - b11a - 42db5deb2b06', list: [1, 2, 3] },
         { name: 6, id: 'c78b2844 - 1d56 - 4a8f - 8e32 - da5c620d6fdb', list: [1, 2, 3] }
-      ]
+      ],
+      userData :{
+        name: 'John Doe',
+        age: 30,
+        address: '123 Main St',
+        city: 'New York',
+        state: 'NY',
+        zip: 10001
+      }
+    }
+  },
+  computed : {
+    refinedUserData(){
+      return{
+        name: this.userData.name,
+        age: this.userData.age,
+        address: this.userData.address,
+        city: this.userData.city,
+        state: this.userData.state,
+        zip: this.userData.zip
+      }
     }
   },
   watch: {
@@ -30,6 +54,7 @@ export default {
 
 <template>
   <div>
+    <UserCard :user="refinedUserData"/>
     <BaseCounter/>
     <hr />
     <p v-if="message.length % 2 === 0">Even: {{ message }}</p>

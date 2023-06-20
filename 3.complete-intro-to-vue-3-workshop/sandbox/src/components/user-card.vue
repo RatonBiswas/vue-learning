@@ -5,7 +5,8 @@ export default {
             type: Object,
             required: true
         }
-    }
+    },
+    emits:['change-name']
 }
 </script>
 <template>
@@ -16,5 +17,6 @@ export default {
     <p>City : {{ user.city }}</p>
     <p>State : {{ user.state }}</p>
     <p>Zip : {{ user.zip }}</p>
+    <button @click="$emit(change-name)">Change Name</button>
   </div>
 </template>

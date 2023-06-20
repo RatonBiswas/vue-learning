@@ -29,6 +29,11 @@ export default {
       }
     }
   },
+  methods: {
+    changeUserName(){
+      this.userData.name = 'Jane Doe'
+    }
+  },
   computed : {
     refinedUserData(){
       return{
@@ -54,7 +59,7 @@ export default {
 
 <template>
   <div>
-    <UserCard :user="refinedUserData"/>
+    <UserCard :user="refinedUserData" @change-name="changeUserName"/>
     <BaseCounter/>
     <hr />
     <p v-if="message.length % 2 === 0">Even: {{ message }}</p>

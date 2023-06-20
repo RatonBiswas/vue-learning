@@ -3,21 +3,21 @@ export default {
   props: {
     character: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
-  emits:['favorite'],
+  emits: ["favorite"],
   methods: {
-    favouriteCharacter() {
-      this.$emit('favorite',this.character)
-    }
-  }
-}
+    favoriteCharacter() {
+      this.$emit("favorite", this.character);
+    },
+  },
+};
 </script>
 
 <template>
   <div>
     <p>{{ character.name }}</p>
-    <button @click="favouriteCharacter">⭐ Favourite</button>
+    <button @click="favoriteCharacter">⭐ Favorite</button>
   </div>
 </template>

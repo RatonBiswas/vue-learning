@@ -1,34 +1,35 @@
 <script>
-//import BenderStatistic from './components/BenderStatistic.vue'
+import BaseLayout from './components/BaseLayout.vue'
+import BenderStatistics from './components/BenderStatistics.vue'
 import CharacterCard from './components/CharacterCard.vue'
 
-
 export default {
-  components:{
-    //BenderStatistic,
+  components: {
+    BaseLayout,
+    BenderStatistics,
     CharacterCard
   },
-  data:()=>({
+  data: () => ({
     newCharacter: {
       name: '',
-      element:[]
+      element: []
     },
     characterList: [
       {
-        name: 'Raton',
-        element: ['Air', 'Earth', 'Dragon', 'Water', 'Fire']
+        name: 'Aang',
+        element: ['Air', 'Earth', 'Water', 'Fire']
       },
       {
-        name: 'Mithila',
-        element: ['Air']
+        name: 'Zuko',
+        element: ['Fire']
       },
       {
-        name: 'Nondita',
+        name: 'Toph',
         element: ['Earth']
       },
       {
-        name: 'Emon',
-        element: ['Fire']
+        name: 'Katara',
+        element: ['Water']
       }
     ],
     favoriteList: []
@@ -36,11 +37,9 @@ export default {
   methods: {
     addNewCharacter() {
       this.characterList.push(this.newCharacter)
-      this.newCharacter = {
-        name: ''
-      }
+      this.newCharacter = { name: '' }
     },
-    addFavouriteCharacter(payload){
+    addFavoriteCharacter(payload) {
       this.favoriteList.push(payload)
     }
   }
@@ -49,30 +48,34 @@ export default {
 
 <template>
   <div>
-    <!--<BenderStatistic :characters="characterList"/>-->
+    <BaseLayout>
+      <template v-slot:two>
+        <h2>New Character</h2>
+        <pre>{{ newCharacter }}</pre>
+        <label for="character-name">Name</label>
+        <input type="text" v-model="newCharacter.name" @keyup.enter="addNewCharacter" />
+        <p>
+          <span v-for="(character, index) in characterList" :key="`comma-list-character-${index}`"
+            >{{ character.name }}{{ index === characterList.length - 1 ? '' : ', ' }}
+          </span>
+        </p>
+      </template>
+    </BaseLayout>
+    <BenderStatistics :characters="characterList" />
     <h2>Characters</h2>
-    <p v-if="characterList.length === 0">there are no character</p>
-    <ul v-else-if="characterList.length % 2 ===0">
+    <p v-if="characterList.length === 0">There are no characters</p>
+    <ul v-else-if="characterList.length % 2 === 0">
       <li v-for="(character, index) in characterList" :key="`even-character-${index}`">
-       <CharacterCard :character="character" @favorite="addFavouriteCharacter"/>
+        <CharacterCard :character="character" @favorite="addFavoriteCharacter" />
       </li>
     </ul>
-    <p v-else>There are Odd Characters!</p>
-    <h2>Favourite Character</h2>
+    <p v-else>There are odd characters!</p>
+    <h2>Favorite Characters</h2>
     <ul v-if="favoriteList.length > 0">
       <li v-for="(character, index) in favoriteList" :key="`odd-character-${index}`">
         {{ character }}
       </li>
     </ul>
-    <p v-else>No Favourite Character Yet!</p>
-    <h2>New Character</h2>
-    <pre>{{ newCharacter }}</pre>
-    <label for="character-name">Name</label>
-    <input type="text" v-model="newCharacter.name" @keyup.enter="addNewCharacter" />
-    <p>
-      <span v-for="(character, index) in characterList" :key="`comma-list-character-${index}`">
-        {{ character.name }} {{ index === characterList.length - 1 ? '' : ',' }}
-      </span>
-    </p>
+    <p v-else>No favorite characters yet!</p>
   </div>
 </template>

@@ -1,22 +1,24 @@
 <script>
 export default {
-    props:{
-        user:{
-            type: Object,
-            required: true
-        }
-    },
-    emits:['change-name']
+  props: {
+    user: {
+      type: Object,
+      required: true
+    }
+  },
+  emits: ['change-name'],
+  methods: {
+    tellParentChangeName() {
+      this.$emit('change-name')
+    }
+  }
 }
 </script>
+
 <template>
   <div>
-    <h1>User Name:{{ user.name }}</h1>
-    <p>Address : {{ user.address }}</p>
-    <p>Age : {{ user.age }}</p>
-    <p>City : {{ user.city }}</p>
-    <p>State : {{ user.state }}</p>
-    <p>Zip : {{ user.zip }}</p>
-    <button @click="$emit(change-name)">Change Name</button>
+    <h1>User: {{ user.name }}</h1>
+    <p>Favorite Food: {{ user.food }}</p>
+    <button @click="tellParentChangeName">Change Name</button>
   </div>
 </template>

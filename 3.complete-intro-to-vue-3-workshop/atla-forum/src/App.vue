@@ -16,19 +16,19 @@ export default {
     },
     characterList: [
       {
-        name: 'Aang',
+        name: 'Raton',
         element: ['Air', 'Earth', 'Water', 'Fire']
       },
       {
-        name: 'Zuko',
+        name: 'Mithila',
         element: ['Fire']
       },
       {
-        name: 'Toph',
+        name: 'Nondita',
         element: ['Earth']
       },
       {
-        name: 'Katara',
+        name: 'Emon',
         element: ['Water']
       }
     ],

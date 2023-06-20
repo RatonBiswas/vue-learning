@@ -1,10 +1,17 @@
 <script>
+//import BenderStatistic from './components/BenderStatistic.vue'
+import CharacterCard from './components/CharacterCard.vue'
+
+
 export default {
-  data(){
-    return{
-    counterTitle: 'Counter Standard',
+  components:{
+    //BenderStatistic,
+    CharacterCard
+  },
+  data:()=>({
     newCharacter: {
-      name: ''
+      name: '',
+      element:[]
     },
     characterList: [
       {
@@ -22,36 +29,10 @@ export default {
       {
         name: 'Emon',
         element: ['Fire']
-      },
-      {
-        name: 'Farhan',
-        element: ['Water']
       }
     ],
-    favcharacterList: []
-  }},
-  computed: {
-    benderStatistics() {
-      const elements = ['Air', 'Earth', 'Water', 'Fire', 'Dragon']
-      const statistics = {
-        Air: 0,
-        Earth: 0,
-        Water: 0,
-        Fire: 0,
-        Dragon: 0
-      }
-
-      this.characterList.forEach((character) => {
-        console.log(character.name)
-        elements.forEach((element) => {
-          if (character.element.indexOf(element) > -1) {
-            statistics[element] += 1
-          }
-        })
-      })
-      return statistics
-    }
-  },
+    favoriteList: []
+  }),
   methods: {
     addNewCharacter() {
       this.characterList.push(this.newCharacter)
@@ -59,9 +40,8 @@ export default {
         name: ''
       }
     },
-    favouriteCharacter(character) {
-      this.favcharacterList.push(character)
-      console.log(this.favcharacterList)
+    addFavouriteCharacter(payload){
+      this.favoriteList.push(payload)
     }
   }
 }
@@ -69,28 +49,22 @@ export default {
 
 <template>
   <div>
-    <h1>{{ counterTitle }}</h1>
-    <h2>Statistics</h2>
-    <ul>
-      <li v-for="(stat, type) in benderStatistics" :key="`bender-${stat}-${type}`">
-        {{ type }}:{{ stat }}
-      </li>
-    </ul>
+    <!--<BenderStatistic :characters="characterList"/>-->
     <h2>Characters</h2>
-    <p v-if="characterList.length === 0">there is no character</p>
-    <ul v-else>
+    <p v-if="characterList.length === 0">there are no character</p>
+    <ul v-else-if="characterList.length % 2 ===0">
       <li v-for="(character, index) in characterList" :key="`even-character-${index}`">
-        <p>{{ character.name }}</p>
-        <button @click="favouriteCharacter(character)">⭐ Favourite</button>
+       <CharacterCard :character="character" @favorite="addFavouriteCharacter"/>
       </li>
     </ul>
+    <p v-else>There are Odd Characters!</p>
     <h2>Favourite Character</h2>
-    <ul v-if="favcharacterList.length > 0">
-      <li v-for="(character, index) in favcharacterList" :key="`odd-character-${index}`">
-        {{ character.name }}
+    <ul v-if="favoriteList.length > 0">
+      <li v-for="(character, index) in favoriteList" :key="`odd-character-${index}`">
+        {{ character }}
       </li>
     </ul>
-    <p v-else>There is no Favourite Character</p>
+    <p v-else>No Favourite Character Yet!</p>
     <h2>New Character</h2>
     <pre>{{ newCharacter }}</pre>
     <label for="character-name">Name</label>

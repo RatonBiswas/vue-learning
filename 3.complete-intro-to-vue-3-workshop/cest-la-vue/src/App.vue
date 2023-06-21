@@ -1,34 +1,34 @@
 <script>
-import HomePage from "./components/HomePage.vue";
-import LoginPage from "./components/LoginPage.vue";
-import UserPage from "./components/UserPage.vue";
+import HomePage from './components/HomePage.vue'
+import LoginPage from './components/LoginPage.vue'
+import UserPage from './components/UserPage.vue'
 
 export default {
   components: {
     HomePage,
     LoginPage,
-    UserPage,
+    UserPage
   },
   data: () => ({
-    currentPage: "User",
+    currentPage: 'User'
   }),
   computed: {
     renderPage() {
-      return this.currentPage + "Page";
-    },
+      return this.currentPage + 'Page'
+    }
   },
   methods: {
     showHomePage() {
-      this.currentPage = "Home";
+      this.currentPage = 'Home'
     },
     showLoginPage() {
-      this.currentPage = "Login";
+      this.currentPage = 'Login'
     },
     showUserPage() {
-      this.currentPage = "User";
-    },
-  },
-};
+      this.currentPage = 'User'
+    }
+  }
+}
 </script>
 
 <template>
@@ -41,8 +41,10 @@ export default {
         <a href="#" @click.prevent="showUserPage">User</a>
       </nav>
     </header>
-
-    <component :is="renderPage" :key="renderPage" />
+    <Suspense>
+      <component :is="renderPage" :key="renderPage" />
+      <template v-slot:fallback> Data is loading... </template>
+    </Suspense>
   </div>
 </template>
 

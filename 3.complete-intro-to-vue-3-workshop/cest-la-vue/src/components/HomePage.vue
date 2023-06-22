@@ -1,4 +1,11 @@
-<script></script>
+<script setup>
+import { userList } from "../composables/useUserStore";
+import { computed } from "vue";
+
+const shortUserList = computed(() => {
+  return userList.value.splice(0, 5);
+});
+</script>
 
 <template>
   <main>
@@ -7,6 +14,12 @@
       This is a place to manage various things: todos, users, posts, etc.
       Whatever your mind desires!
     </p>
+    <hr />
+    <ul>
+      <li v-for="user in shortUserList" :key="`user-${user.id}`">
+        {{ user.name }}
+      </li>
+    </ul>
   </main>
 </template>
 
@@ -28,7 +41,7 @@ label {
   margin-bottom: 5px;
 }
 
-input[type="email"] {
+input[type='email'] {
   padding: 0.5rem;
   margin-bottom: 30px;
 }

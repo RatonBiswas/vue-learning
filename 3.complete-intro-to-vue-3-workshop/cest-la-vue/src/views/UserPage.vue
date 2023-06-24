@@ -1,7 +1,9 @@
 <script setup>
 import UserCard from "@/components/UserCard.vue";
 import { defineProps } from "vue";
-import {userList} from "@/composables/useUserStore"
+// import {userList} from "@/composables/useUserStore"
+//import useUserStore from "@/stores/UserStore"
+import {useUserStore} from "@/stores/UserStore"
 
 defineProps({
   title: {
@@ -16,16 +18,21 @@ defineEmits(["update-user-list"]);
 //   userList: [], // when we use variable in any component we declare a composables and don't need to use reactive,if we use reactive we need some extra code.
 // });
 
-async function fetchUsers() {
-  const response = await fetch(
-    "https://jsonplaceholder.typicode.com/users"
-  ).then((response) => response.json());
+// async function fetchUsers() {
+//   const response = await fetch(
+//     "https://jsonplaceholder.typicode.com/users"
+//   ).then((response) => response.json());
 
-  return response;
-}
+//   return response;
+// }
 
+
+const useUserList = useUserStore()
 //state.userList = await fetchUsers(); we don't need state because if we use reactive we need state and data is stored in the state field
- userList.value = await fetchUsers(); // data is stored in the value field
+//userList.value = await fetchUsers(); // data is stored in the value field
+
+// useUserList.userList = await useUserList.fetchUsers();
+ useUserList.fetchUsers();
 </script>
 
 <template>
@@ -33,7 +40,7 @@ async function fetchUsers() {
     <h1>{{ title }}</h1>
     <ul>
       <UserCard
-        v-for="user in userList"
+        v-for="user in useUserList.userList"
         :user="user"
         :key="`user-${user.id}`"
       />

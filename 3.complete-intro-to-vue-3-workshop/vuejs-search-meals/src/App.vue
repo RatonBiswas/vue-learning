@@ -2,9 +2,7 @@
 </script>
 
 <template>
-  <h1 class="text-3xl font-bold underline">
-    Hello Raton!
-  </h1>
+  <router-view/>
 </template>
 
 <style scoped>

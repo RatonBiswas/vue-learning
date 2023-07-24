@@ -1,12 +1,15 @@
 <template>
   <header>
     <h1>My Friends</h1>
+    <NewFriend @add-new-contact="addNewContact" />
     <ul v-for="friend in friends" :key="friend.id">
       <FriendContact
+        :id="friend.id"
         :name="friend.name"
-        :emailAddress="friend.email"
-        :phoneNumber="friend.phone"
-        :isFavourite="true"
+        :phone-number="friend.phone"
+        :email-address="friend.email"
+        :is-favourite="friend.isFavourite"
+        @toggle-favourites="toggleFavouriteStatus"
       />
     </ul>
   </header>
@@ -14,9 +17,11 @@
 
 <script>
 import FriendContact from './components/FriendContact.vue'
+import NewFriend from './components/NewFriend.vue'
 export default {
   components: {
-    FriendContact
+    FriendContact,
+    NewFriend
   },
   data() {
     return {
@@ -25,15 +30,35 @@ export default {
           id: 'Raton',
           name: 'Raton Biswas',
           phone: '0123 45678 90',
-          email: 'raton@localhost.com'
+          email: 'raton@localhost.com',
+          isFavourite: true
         },
         {
           id: 'Jhon',
           name: 'Jhon Jones',
           phone: '0987 654421 21',
-          email: 'jhon@localhost.com'
+          email: 'jhon@localhost.com',
+          isFavourite: true
         }
       ]
+    }
+  },
+  methods: {
+    toggleFavouriteStatus(friendId) {
+      const favourite = this.friends.find((friend) => friend.id === friendId)
+      favourite.isFavourite = !favourite.isFavourite
+      //console.log(favourite.isFavourite);
+    },
+    addNewContact(name, phone, email) {
+      const newContact = {
+        id: new Date().toISOString(),
+        name: name,
+        phone: phone,
+        email: email,
+        isFavourite: false
+      }
+      this.friends.push(newContact)
+      console.log(newContact);
     }
   }
 }
@@ -70,7 +95,8 @@ header {
   list-style: none;
 }
 
-#app li {
+#app li,
+#app form {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   margin: 1rem auto;
   border-radius: 10px;
@@ -102,5 +128,18 @@ header {
   background-color: #ec3169;
   border-color: #ec3169;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
+}
+#app input {
+  font: inherit;
+  padding: 0.15rem;
+}
+#app label {
+  font-weight: bold;
+  margin-right: 1rem;
+  width: 7rem;
+  display: inline-block;
+}
+#app form div {
+  margin: 1rem 0;
 }
 </style>

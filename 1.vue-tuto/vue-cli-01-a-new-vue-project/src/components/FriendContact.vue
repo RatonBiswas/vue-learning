@@ -7,13 +7,14 @@
       <li><strong>Phone : </strong>{{ phoneNumber }}</li>
       <li><strong>Email : </strong>{{ emailAddress }}</li>
     </ul>
+    <button @click="$emit('delete',id)">Delete</button>
   </li>
 </template>
 
 <script>
 export default {
   //   props: ['name', 'phoneNumber', 'emailAddress'],
-  emits: ['toggle-favourites'],
+  emits: ['toggle-favourites','delete'],
   props: {
     id: { type: String },
     name: {

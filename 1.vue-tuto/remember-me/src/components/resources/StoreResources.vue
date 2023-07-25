@@ -1,12 +1,12 @@
 <template>
   <ul>
     <LearningResource
-      v-for="storeResource in storeResources"
-      :key="storeResource.id"
-      :title="storeResource.title"
-      :description="storeResource.description"
-      :id="storeResource.id"
-      :link="storeResource.link"
+      v-for="reso in resources"
+      :key="reso.id"
+      :title="reso.title"
+      :description="reso.description"
+      :id="reso.id"
+      :link="reso.link"
     />
   </ul>
 </template>
@@ -14,10 +14,15 @@
 <script>
 import LearningResource from './LearningResource.vue'
 export default {
+  /* don't need props because we use provider
+    to inject data access anywhere
+   */
+  inject:['resources'],
   components: {
     LearningResource
   },
-  props: ['storeResources']
+  // props: ['resos']  
+ 
 }
 </script>
 

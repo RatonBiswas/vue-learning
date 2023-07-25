@@ -1,13 +1,12 @@
 <template>
-  <button :type="type" :class="mode">
-    <slot ></slot>
+  <button :class="mode">
+    <slot></slot>
   </button>
 </template>
 
 <script>
-//import baseButton from '../../../../../3.complete-intro-to-vue-3-workshop/sandbox/src/components/base-button.vue'
 export default {
-  props: ['type', 'mode']
+  props: ['mode']
 }
 </script>
 

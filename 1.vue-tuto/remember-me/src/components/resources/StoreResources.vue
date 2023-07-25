@@ -7,6 +7,7 @@
       :description="reso.description"
       :id="reso.id"
       :link="reso.link"
+      
     />
   </ul>
 </template>

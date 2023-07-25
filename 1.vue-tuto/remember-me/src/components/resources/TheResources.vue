@@ -15,11 +15,11 @@
 </template>
 
 <script>
-import StoreResources from './StoreResources.vue'
+import StoredResources from './StoreResources.vue'
 import AddResource from './AddResource.vue'
 export default {
   components: {
-    StoreResources,
+    StoredResources,
     AddResource
   },
   data() {
@@ -43,7 +43,8 @@ export default {
   },
   provide() {
     return {
-      resources: this.storedResources
+      resources: this.storedResources,
+      addResource: this.addResource
     }
   },
   computed: {
@@ -66,7 +67,7 @@ export default {
         link: newLink
       }
       this.storedResources.unshift(newresource)
-      this.setSelectedTab = 'stored-resources'
+      this.selectedTab = 'stored-resources'
     }
   }
 }

@@ -7,6 +7,7 @@
       <base-button @click="setSelectedTab('add-resource')" :mode="addResButtonMode"
         >Add Resource</base-button
       >
+      <base-button @click="setSelectedTab('the-form')" :mode="addFormButtonMode">Form</base-button>
     </base-card>
     <keep-alive>
       <component :is="selectedTab"></component>
@@ -17,10 +18,12 @@
 <script>
 import StoredResources from './StoreResources.vue'
 import AddResource from './AddResource.vue'
+import TheForm from '../ui/TheForm.vue'
 export default {
   components: {
     StoredResources,
-    AddResource
+    AddResource,
+    TheForm
   },
   data() {
     return {
@@ -54,6 +57,9 @@ export default {
     },
     addResButtonMode() {
       return this.selectedTab === 'add-resource' ? null : 'flat'
+    },
+    addFormButtonMode() {
+      return this.selectedTab === 'the-form' ? null : 'flat'
     }
   },
   methods: {
@@ -70,9 +76,9 @@ export default {
       this.storedResources.unshift(newresource)
       this.selectedTab = 'stored-resources'
     },
-    removeItem(resId){
-      const newIndex = this.storedResources.findIndex((res)=> res.id === resId);
-      this.storedResources.splice(newIndex,1)
+    removeItem(resId) {
+      const newIndex = this.storedResources.findIndex((res) => res.id === resId)
+      this.storedResources.splice(newIndex, 1)
     }
   }
 }

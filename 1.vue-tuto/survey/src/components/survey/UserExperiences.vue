@@ -6,7 +6,11 @@
         <base-button @click="loadSumitted">Load Submitted Experiences</base-button>
       </div>
       <p v-if="isLoading">Loading...</p>
-      <ul v-else>
+      <p v-else-if="!isLoading && error">{{ error }}</p>
+      <p v-else-if="!isLoading && (!results || results.length === 0)">
+        No data here please add survey first!
+      </p>
+      <ul v-else-if="!isLoading && results && results.length > 0">
         <SurveyResult
           v-for="result in results"
           :key="result.id"
@@ -31,11 +35,13 @@ export default {
     return {
       results: [],
       isLoading: false,
+      error: null
     }
   },
   methods: {
     loadSumitted() {
       this.isLoading = true
+      this.error = null
       fetch('https://sumitted-reviews-default-rtdb.firebaseio.com/surveys.json')
         .then((response) => {
           if (response.ok) {
@@ -54,6 +60,10 @@ export default {
             })
           }
           this.results = newResults
+        }).catch(error=>{
+          console.log(error);
+          this.isLoading = false
+          this.error = 'Failed to fetch data.Please try again'
         })
     }
   },

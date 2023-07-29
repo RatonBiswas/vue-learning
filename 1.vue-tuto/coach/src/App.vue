@@ -1,20 +1,28 @@
 <template>
   <div>
+    <TheHeader/>
     <router-view></router-view>
-    <h2>Hi Raton!</h2>
   </div>
 </template>
   
 <script>
+import TheHeader from './components/layout/TheHeaderr.vue'
+export default {
+  components: {
+    TheHeader
+  }
+}
 </script>
   
   <style>
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
 * {
   box-sizing: border-box;
 }
 
 html {
-  font-family: sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 body {

@@ -2,11 +2,11 @@
   <form @submit.prevent="submitForm">
     <div class="form-control">
       <label for="text">Firstname</label>
-      <input type="text" id="firstname" v-model.trim="firstName"/>
+      <input type="text" id="firstname" v-model.trim="firstName" />
     </div>
     <div class="form-control">
       <label for="text">Lastname</label>
-      <input type="text" id="lastname" v-model.trim="lastName"/>
+      <input type="text" id="lastname" v-model.trim="lastName" />
     </div>
     <div class="form-control">
       <label for="text">Description</label>
@@ -14,12 +14,12 @@
     </div>
     <div class="form-control">
       <label for="text">Hourly Rate</label>
-      <input type="number" id="rate" v-model.number="rate"/>
+      <input type="number" id="rate" v-model.number="rate" />
     </div>
     <div class="form-control">
       <h3>Areas of Expertise</h3>
       <div>
-        <input type="checkbox" id="frontend" value="frontend" v-model="areas"/>
+        <input type="checkbox" id="frontend" value="frontend" v-model="areas" />
         <label for="frontend">Frontend Development</label>
       </div>
       <div>
@@ -37,27 +37,29 @@
 
 <script>
 export default {
-     data(){
-        return{
-            firstName : '',
-            lastName : '',
-            description: '',
-            rate: null,
-            areas:[],
-        }
-     },
-     methods:{
-        submitForm(){
-            const formData = {
-                firstName : this.firstName,
-                lastName : this.lastName,
-                desc : this.description,
-                rate : this.rate,
-                areas : this.areas,
-            }
-            console.log(formData);
-        }
-     }
+  emits: ['save-data'],
+  data() {
+    return {
+      firstName: '',
+      lastName: '',
+      description: '',
+      rate: null,
+      areas: []
+    }
+  },
+  methods: {
+    submitForm() {
+      const formData = {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        desc: this.description,
+        rate: this.rate,
+        areas: this.areas
+      }
+      console.log(formData);
+      this.$emit('save-data', formData)
+    }
+  }
 }
 </script>
 

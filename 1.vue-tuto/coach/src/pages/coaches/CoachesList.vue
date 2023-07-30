@@ -1,27 +1,27 @@
 <template>
   <div>
     <section>
-      <CoachFilter @change-filter="setFilters"/>
+      <CoachFilter @change-filter="setFilters" />
     </section>
     <section>
       <base-card>
-      <div class="controls">
-        <base-button mode="outline">Refresh</base-button>
-        <base-button link to="/register">Register As Coach</base-button>
-      </div>
-      <ul v-if="hasCoaches">
-        <CoachesItem
-        v-for="coach in filteredCoaches"
-        :key="coach.id"
-        :id="coach.id"
-        :first-name="coach.firstName"
-        :last-name="coach.lastName"
-        :rate="coach.hourlyRate"
-        :areas="coach.areas"
-        />
-      </ul>
-      <h3 v-else>No coaches found</h3>
-    </base-card>
+        <div class="controls">
+          <base-button mode="outline">Refresh</base-button>
+          <base-button v-if="!isCoach" link to="/register">Register As Coach</base-button>
+        </div>
+        <ul v-if="hasCoaches">
+          <CoachesItem
+            v-for="coach in filteredCoaches"
+            :key="coach.id"
+            :id="coach.id"
+            :first-name="coach.firstName"
+            :last-name="coach.lastName"
+            :rate="coach.hourlyRate"
+            :areas="coach.areas"
+          />
+        </ul>
+        <h3 v-else>No coaches found</h3>
+      </base-card>
     </section>
   </div>
 </template>
@@ -31,27 +31,30 @@ import CoachesItem from '../../components/coaches/CoachesItem.vue'
 import CoachFilter from '../../components/coaches/CoachFilter.vue'
 
 export default {
-  components: { CoachesItem ,CoachFilter},
-  data(){
-    return{
-      activeFilters:{
+  components: { CoachesItem, CoachFilter },
+  data() {
+    return {
+      activeFilters: {
         frontend: true,
         backend: true,
-        career:true
+        career: true
       }
     }
   },
   computed: {
+    isCoach() {
+      return this.$store.getters['coaches/isCoach']
+    },
     filteredCoaches() {
       const coaches = this.$store.getters['coaches/coaches']
-      return coaches.filter(coach=>{
-        if(this.activeFilters.frontend && coach.areas.includes('frontend')){
+      return coaches.filter((coach) => {
+        if (this.activeFilters.frontend && coach.areas.includes('frontend')) {
           return true
         }
-        if(this.activeFilters.backend && coach.areas.includes('backend')){
+        if (this.activeFilters.backend && coach.areas.includes('backend')) {
           return true
         }
-        if(this.activeFilters.career && coach.areas.includes('career')){
+        if (this.activeFilters.career && coach.areas.includes('career')) {
           return true
         }
       })
@@ -60,8 +63,8 @@ export default {
       return this.$store.getters['coaches/hasCoaches']
     }
   },
-  methods:{
-    setFilters(updatedFilters){
+  methods: {
+    setFilters(updatedFilters) {
       this.activeFilters = updatedFilters
     }
   }

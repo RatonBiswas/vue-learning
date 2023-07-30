@@ -50,8 +50,8 @@ export default {
     }
   },
   created() {
-    // const coaches = this.$store.getters['coaches/coaches']
-    this.selectedCoach = this.$store.getters['coaches/coaches'].find(
+    const coaches = this.$store.getters['coaches/coaches']
+    this.selectedCoach = coaches.find(
       (coach) => coach.id === this.id
     )
   }

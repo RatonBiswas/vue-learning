@@ -1,9 +1,9 @@
 <template>
   <header>
-    <h1>
-      <router-link to="/">Find A Coach</router-link>
-    </h1>
     <nav>
+      <h1>
+        <router-link to="/">Find a Coach</router-link>
+      </h1>
       <ul>
         <li>
           <router-link to="/coaches">All Coaches</router-link>
@@ -15,10 +15,7 @@
     </nav>
   </header>
 </template>
-  
-<script>
-</script>
-  
+
 <style scoped>
 header {
   width: 100%;

@@ -46,7 +46,7 @@ export default {
       return this.selectedCoach.description
     },
     contachLink() {
-      return this.$route.path + '/' + this.id + '/contact'
+      return this.$route.path + '/contact'
     }
   },
   created() {

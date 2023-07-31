@@ -34,7 +34,7 @@ export default {
     const response =await fetch(`https://coaches-cc10e-default-rtdb.firebaseio.com/coaches.json`)
     // console.log(response)
     const responseData = await response.json()
-    console.log(responseData)
+    // console.log(responseData)
 
     if (!response.ok) {
       //

@@ -3,6 +3,7 @@
     <slot></slot>
   </div>
 </template>
+
 <style scoped>
 .card {
   border-radius: 12px;

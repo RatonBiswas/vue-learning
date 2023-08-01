@@ -3,14 +3,14 @@
     <section>
       <base-card>
         <h2>{{ fullName }}</h2>
-        <h3>${{ rate }} hour</h3>
+        <h3>${{ rate }}/hour</h3>
       </base-card>
     </section>
     <section>
       <base-card>
         <header>
-          <h2>Interested? Reach Out Now!</h2>
-          <base-button link :to="contachLink">Contact</base-button>
+          <h2>Interested? Reach out now!</h2>
+          <base-button link :to="contactLink">Contact</base-button>
         </header>
         <router-view></router-view>
       </base-card>
@@ -29,34 +29,30 @@ export default {
   props: ['id'],
   data() {
     return {
-      selectedCoach: null
-    }
+      selectedCoach: null,
+    };
   },
   computed: {
     fullName() {
-      return this.selectedCoach.firstName + ' ' + this.selectedCoach.lastName
+      return this.selectedCoach.firstName + ' ' + this.selectedCoach.lastName;
     },
     areas() {
-      return this.selectedCoach.areas
+      return this.selectedCoach.areas;
     },
     rate() {
-      return this.selectedCoach.hourlyRate
+      return this.selectedCoach.hourlyRate;
     },
     description() {
-      return this.selectedCoach.description
+      return this.selectedCoach.description;
     },
-    contachLink() {
-      return this.$route.path + '/contact'
-    }
+    contactLink() {
+      return this.$route.path + '/' + this.id + '/contact';
+    },
   },
   created() {
-    const coaches = this.$store.getters['coaches/coaches']
-    this.selectedCoach = coaches.find(
+    this.selectedCoach = this.$store.getters['coaches/coaches'].find(
       (coach) => coach.id === this.id
-    )
-  }
-}
+    );
+  },
+};
 </script>
-
-<style scoped>
-</style>

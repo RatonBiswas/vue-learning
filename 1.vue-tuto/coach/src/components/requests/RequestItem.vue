@@ -1,9 +1,9 @@
 <template>
   <li>
     <div>
-      <a :href="emailLInk">Email : {{ email }}</a>
+      <a :href="emailLink">{{ email }}</a>
     </div>
-    <p>Messages : {{ message }}</p>
+    <p>{{ message }}</p>
   </li>
 </template>
 
@@ -11,7 +11,7 @@
 export default {
   props: ['email', 'message'],
   computed: {
-    emailLInk() {
+    emailLink() {
       return 'mailto:' + this.email
     }
   }

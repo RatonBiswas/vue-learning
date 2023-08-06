@@ -2,14 +2,23 @@
 
 <template>
   <main>
-    <UserList />
+    <UserList :users="activeUser"/>
   </main>
 </template>
 
 <script>
 import UserList from './components/users/UserList.vue';
+import USER_DATA from './dummy-data'
 export default {
-  components: {}
+  components: {
+    UserList
+  },
+  data(){
+    return{
+        selectedUser : null,
+        activeUser : USER_DATA
+    }
+  },
 }
 </script>
 <style>

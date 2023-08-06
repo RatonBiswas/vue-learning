@@ -1,18 +1,21 @@
 <template>
-  <div>
-    <li>
-      {{ userName }}
-    </li>
-    <button>View Projects</button>
-  </div>
+  <li>
+    <h3>{{ userName }}</h3>
+    <button @click="viewProjects">View Projects</button>
+  </li>
 </template>
 
 <script>
 export default {
-  props: ['id', 'userName']
-}
+  props: ['id', 'userName'],
+  emits: ['list-projects'],
+  methods: {
+    viewProjects() {
+      this.$emit('list-projects', this.id);
+    },
+  },
+};
 </script>
-
 
 <style scoped>
 li {

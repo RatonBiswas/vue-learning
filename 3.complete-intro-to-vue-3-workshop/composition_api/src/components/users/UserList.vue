@@ -1,19 +1,28 @@
 <template>
   <base-container>
     <h2>Active Users</h2>
+    <base-search @search="updateSearch" :search-term="enteredSearchTerm"></base-search>
+    <div>
+      <button @click="sort('asc')" :class="{ selected: sorting === 'asc' }">Sort Ascending</button>
+      <button @click="sort('desc')" :class="{ selected: sorting === 'desc' }">
+        Sort Descending
+      </button>
+    </div>
     <ul>
-      <UserItem
+      <user-item
         v-for="user in displayedUsers"
         :key="user.id"
-        :userName="user.fullName"
+        :user-name="user.fullName"
         :id="user.id"
-      />
+        @list-projects="$emit('list-projects', $event)"
+      ></user-item>
     </ul>
   </base-container>
 </template>
 
 <script>
 import UserItem from './UserItem.vue'
+
 export default {
   components: {
     UserItem
@@ -21,22 +30,20 @@ export default {
   props: ['users'],
   data() {
     return {
-      sorting: null,
+      enteredSearchTerm: '',
       activeSearchTerm: '',
-      enteredSearchTerm: ''
+      sorting: null
     }
   },
   computed: {
     availableUsers() {
-      let availableUsers = []
+      let users = []
       if (this.activeSearchTerm) {
-        availableUsers = this.users.filter((user) => {
-          user.fullName.includes(this.activeSearchTerm)
-        })
+        users = this.users.filter((usr) => usr.fullName.includes(this.activeSearchTerm))
       } else if (this.users) {
-        availableUsers = this.users
+        users = this.users
       }
-      return availableUsers
+      return users
     },
     displayedUsers() {
       if (!this.sorting) {
@@ -54,9 +61,31 @@ export default {
         }
       })
     }
+  },
+  methods: {
+    updateSearch(val) {
+      this.enteredSearchTerm = val
+    },
+    sort(mode) {
+      this.sorting = mode
+    }
+  },
+  watch: {
+    enteredSearchTerm(val) {
+      setTimeout(() => {
+        if (val === this.enteredSearchTerm) {
+          this.activeSearchTerm = val
+        }
+      }, 300)
+    }
   }
 }
 </script>
 
 <style scoped>
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 </style>

@@ -1,24 +1,31 @@
-
-
 <template>
   <main>
-    <UserList :users="activeUser"/>
+    <UserList :users="activeUser" @list-projects="selectUser" />
+    <ProjectsList :user="selectedUser" />
   </main>
 </template>
 
 <script>
-import UserList from './components/users/UserList.vue';
+import UserList from './components/users/UserList.vue'
+import ProjectsList from './components/projects/ProjectsList.vue'
 import USER_DATA from './dummy-data'
+
 export default {
   components: {
-    UserList
+    UserList,
+    ProjectsList
   },
-  data(){
-    return{
-        selectedUser : null,
-        activeUser : USER_DATA
+  data() {
+    return {
+      selectedUser: null,
+      activeUser: USER_DATA
     }
   },
+  methods: {
+    selectUser(uid) {
+      this.selectedUser = this.activeUser.find((usr) => usr.id === uid)
+    }
+  }
 }
 </script>
 <style>

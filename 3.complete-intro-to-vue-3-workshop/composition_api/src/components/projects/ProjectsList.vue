@@ -67,7 +67,7 @@ const updateSearch = (val) => {
   <script>
 //   import ProjectItem from './ProjectItem.vue';
 
-export default {
+// export default {
   // components: {
   //   ProjectItem,
   // },
@@ -106,7 +106,7 @@ export default {
   //   this.enteredSearchTerm = ''
   // }
   //   }
-}
+// }
 </script>
   
   <style scoped>

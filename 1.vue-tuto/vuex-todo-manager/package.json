@@ -1,5 +1,5 @@
 {
-  "name": "submitted-reviews",
+  "name": "todo-managers",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,9 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "vue": "^3.3.2"
+    "axios": "^1.4.0",
+    "vue": "^3.3.2",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",

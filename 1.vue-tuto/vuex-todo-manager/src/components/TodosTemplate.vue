@@ -1,25 +1,47 @@
 <template>
   <div>
+    <h3>Todos</h3>
     <base-card>
-      <ul>
-        <li v-for="todo in allTodos" :key="todo.id">
+      <div class="todos">
+        <div v-for="todo in receivedRequests" :key="todo.id" class="todo">
           {{ todo.title }}
-        </li>
-      </ul>
+        </div>
+      </div>
     </base-card>
   </div>
 </template>
 
-<script setup>
-import { useStore } from 'vuex'
-import { computed } from 'vue'
-
-const store = useStore()
-
-const allTodos = computed(() => store.getters['todos/todos'])
+<script>
+export default {
+  methods: {
+    loadTodos() {
+      this.$store.dispatch('todos/fetchTodos')
+    }
+  },
+  computed: {
+    receivedRequests() {
+      return this.$store.getters['todos/allTodos']
+    }
+  },
+  created() {
+    this.loadTodos()
+  }
+}
 </script>
 
-<style  scoped>
+<style scoped>
+.todos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+}
 
-
+.todo {
+  border: 1px solid #ccc;
+  background: #41b883;
+  padding: 0.8rem;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+}
 </style>

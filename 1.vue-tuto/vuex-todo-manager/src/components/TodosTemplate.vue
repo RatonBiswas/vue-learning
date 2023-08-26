@@ -1,7 +1,10 @@
 <template>
   <div>
-    <h3>Todos</h3>
+    <div>
+      <AddTodos/>
+    </div>
     <base-card>
+    <h3>Todos</h3>
       <div class="todos">
         <div v-for="todo in receivedRequests" :key="todo.id" class="todo">
           {{ todo.title }}
@@ -12,7 +15,11 @@
 </template>
 
 <script>
+import AddTodos from './AddTodos.vue'
 export default {
+  components:{
+    AddTodos,
+  },
   methods: {
     loadTodos() {
       this.$store.dispatch('todos/fetchTodos')

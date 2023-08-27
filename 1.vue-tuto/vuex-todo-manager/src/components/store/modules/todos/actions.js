@@ -12,5 +12,9 @@ export default {
     })
     console.log(responseData.data)
     context.commit('postTodos', responseData.data)
+  },
+  async deleteTodo(context, id) {
+    await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+    context.commit('deleteId', id)
   }
 }

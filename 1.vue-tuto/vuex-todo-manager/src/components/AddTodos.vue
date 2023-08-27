@@ -27,9 +27,11 @@ export default {
         this.formIsValid = false
         return
       }
-      this.$store.dispatch('todos/addTodo',{
+      this.$store.dispatch('todos/addTodo', {
         title: this.title
       })
+      this.title = ''
+      
     }
   }
 }

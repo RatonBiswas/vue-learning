@@ -2,6 +2,7 @@
   <div>
     <div>
       <AddTodos/>
+      <FilterTodos/>
     </div>
     <base-card>
     <h3>Todos</h3>
@@ -17,9 +18,11 @@
 
 <script>
 import AddTodos from './AddTodos.vue'
+import FilterTodos from './FilterTodos.vue'
 export default {
   components:{
     AddTodos,
+    FilterTodos,
   },
   methods: {
     loadTodos() {
